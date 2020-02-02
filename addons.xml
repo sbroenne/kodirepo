@@ -31,4 +31,22 @@ The plugin is optimized for an Internet connection with at least 10 MBIT. NHK Li
             <fanart>resources/fanart.jpg</fanart>
         </assets>
     </extension>
+</addon><addon id="repository.sbroenne" name="NHK World TV development repository" provider-name="sbroenne" version="0.0.2">
+   <extension point="xbmc.addon.repository">
+    <info>https://github.com/sbroenne/kodirepo/addons.xml</info>
+    <checksum>https://github.com/sbroenne/kodirepo/addons.xml.md5</checksum>
+    <datadir>https://github.com/sbroenne/kodirepo/</datadir>
+  </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Repository for development of Kodi NHK World TV plug-in</summary>
+        <language />pwd
+        <platform>all</platform>
+        <license>GPL-3.0</license>
+        <forum />
+        <website>www.kodi.tv</website>
+        <email>stefan_broenner@yahoo.com</email>
+        <source>https://github.com/sbroenne/repository.sbroenne</source>
+        <news>Initial release</news>
+        <disclaimer />
+    </extension>
 </addon></addons>
