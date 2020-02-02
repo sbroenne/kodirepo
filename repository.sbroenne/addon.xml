@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.sbroenne" name="NHK World TV development repository" version="0.0.3" provider-name="sbroenne">
+<addon id="repository.sbroenne" name="NHK World TV development repository" version="0.0.4" provider-name="sbroenne">
    <extension point="xbmc.addon.repository">
-    <info>https://github.com/sbroenne/kodirepo/blob/master/addons.xml</info>
-    <checksum>https://github.com/sbroenne/kodirepo/blob/master/addons.xml.md5</checksum>
-    <datadir>https://github.com/sbroenne/kodirepo/blob/master/></datadir>
+    <info>http://raw.githubusercontent.com/sbroenne/kodirepo/master/addons.xml</info>
+    <checksum>http://raw.githubusercontent.com/sbroenne/kodirepo/master/addons.xml.md5</checksum>
+    <datadir>http://raw.githubusercontent.com/sbroenne/kodirepo/master/></datadir>
   </extension>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Repository for development of Kodi NHK World TV plug-in</summary>
