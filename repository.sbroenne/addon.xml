@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.sbroenne" name="NHK World TV development repository" version="0.0.10" provider-name="sbroenne">
+<addon id="repository.sbroenne" name="NHK World TV development repository" version="0.0.11" provider-name="sbroenne">
   <extension point="xbmc.addon.repository" name="Kodi NHK World TV plug-in Development Repository">
     <info compressed="true">https://raw.githubusercontent.com/sbroenne/kodirepo/master/addons.xml.gz</info>
     <checksum>https://raw.githubusercontent.com/sbroenne/kodirepo/master/addons.xml.gz.md5</checksum>
@@ -18,6 +18,7 @@
     <disclaimer>Use at your own risk!</disclaimer>
     <assets>
       <icon>icon.png</icon>
+      <fanart>fanart.jpg</fanart>
     </assets>
   </extension>
 </addon>
