@@ -1,0 +1,3 @@
+Version 0.0.2 - Updated to upstream requests-cache 0.5.2
+Version 0.0.1
+
