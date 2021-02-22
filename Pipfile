@@ -7,10 +7,6 @@ verify_ssl = true
 
 [packages]
 gitpython = "*"
-pylint = "*"
-flake8 = "*"
-rope = "*"
-yapf = "*"
 
 [requires]
-python_version = "2.7"
+python_version = "3.8"
