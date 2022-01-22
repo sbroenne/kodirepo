@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<addons><addon id="plugin.video.nhkworldtv" name="NHK World TV" version="1.0.4" provider-name="sbroenne">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+        <import addon="script.module.requests" />
+        <import addon="script.module.requests-cache" />
+        <import addon="script.module.routing" />
+        <import addon="script.module.future" />
+        <import addon="script.module.kodi-six" />
+        <import addon="script.module.pytz" />
+        <import addon="script.module.tzlocal" />
+    </requires>
+
+    <extension point="xbmc.python.pluginsource" library="main.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Watch NHK World Japan in Full HD - live stream, on-demand and news programs</summary>
+        <description lang="en_GB">
+Watch NHK World Japan in Full HD
+
+- Live Stream 
+- On demand programs - By program, latest and most watched, categories and playlist. You can also browse and search through all programs.
+- Live schedule
+- Top Stories and At a Glance
+- News programs like NEWSLINE, NEWSLINE IN DEPTH and NEWSROOM TOKYO
+
+Content is retrieved and played directly from the NHK World web site.
+
+Plugin supports fallback to HD if you should encounter buffering issues.
+
+Tested on Kodi 18.6+ Leia and 19 Matrix.
+        </description>
+        <disclaimer lang="en_GB">This plugin is a fan project and not related in any way to NHK!</disclaimer>
+        <platform>all</platform>
+        <license>GPL-3.0-or-later</license>
+        <language>en</language>
+        <email>stefan_broenner@yahoo.com</email>
+        <source>https://github.com/sbroenne/plugin.video.nhkworldtv</source>
+        <forum>https://forum.kodi.tv/showthread.php?tid=353215</forum>
+        <news>
+- Removed optional setting of View States so that plugin can be submitted to official repo
+        </news>
+        <assets>
+            <icon>resources/icon.png</icon>
+            <fanart>resources/fanart.jpg</fanart>
+            <screenshot>resources/screenshot01.jpeg</screenshot>
+            <screenshot>resources/screenshot02.jpeg</screenshot>
+            <screenshot>resources/screenshot03.jpeg</screenshot>
+        </assets>
+        <reuselanguageinvoker>true</reuselanguageinvoker>
+    </extension>
+</addon><addon id="repository.sbroenne" name="NHK World TV development repository" version="0.0.13" provider-name="sbroenne">
+  <extension point="xbmc.addon.repository" name="Kodi NHK World TV plug-in Development Repository">
+    <info compressed="true">https://raw.githubusercontent.com/sbroenne/kodirepo/master/addons.xml.gz</info>
+    <checksum>https://raw.githubusercontent.com/sbroenne/kodirepo/master/addons.xml.gz.md5</checksum>
+    <datadir zip="true">https://raw.githubusercontent.com/sbroenne/kodirepo/master</datadir>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Kodi NHK World TV plug-in Development Repository</summary>
+    <language />pwd
+    <platform>all</platform>
+    <license>GPL-3.0</license>
+    <email>stefan_broenner@yahoo.com</email>
+    <source>https://github.com/sbroenne/repository.sbroenne</source>
+    <news>
+       Kodi 19 has been released so the dev repo now contains the Matrix version of the plug-in
+     </news>
+    <disclaimer>Use at your own risk!</disclaimer>
+    <assets>
+      <icon>icon.png</icon>
+      <fanart>fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon></addons>
