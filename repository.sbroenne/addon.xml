@@ -10,7 +10,14 @@
       <hashes>sha256</hashes>
     </dir>
   </extension>
-  <extension point="xbmc.addon.metadata">
+  <extension point="xbmc.addon.repository">
+    <dir minversion="19.0.0">
+      <info compressed="true">
+        https://raw.githubusercontent.com/sbroenne/kodirepo/master/addons.xml.gz</info>
+      <checksum>https://raw.githubusercontent.com/sbroenne/kodirepo/master/addons.xml.gz.md5</checksum>
+      <datadir zip="true">https://raw.githubusercontent.com/sbroenne/kodirepo/master</datadir>
+      <hashes>sha256</hashes>
+    </dir>
     <summary lang="en_GB">Kodi NHK World TV plug-in Development Repository</summary>
     <platform>all</platform>
     <license>GPL-3.0</license>
