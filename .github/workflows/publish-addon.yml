@@ -73,7 +73,11 @@ jobs:
         run: |
           CURRENT_VERSION="${{ steps.version.outputs.current_version }}"
           NEW_VERSION="${{ steps.version.outputs.version }}"
-          sed -i "s/version=\"${CURRENT_VERSION}\"/version=\"${NEW_VERSION}\"/" /tmp/plugin-source/plugin.video.nhkworldtv/addon.xml
+          # Update only the version in the main addon tag, not dependencies
+          sed -i "0,/version=\"${CURRENT_VERSION}\"/s//version=\"${NEW_VERSION}\"/" /tmp/plugin-source/plugin.video.nhkworldtv/addon.xml
+          # Verify the update was successful
+          grep '<addon id="plugin.video.nhkworldtv"' /tmp/plugin-source/plugin.video.nhkworldtv/addon.xml | grep "version=\"${NEW_VERSION}\"" || exit 1
+          echo "Successfully updated version to ${NEW_VERSION}"
       
       - name: Commit version change to temporary clone
         run: |
