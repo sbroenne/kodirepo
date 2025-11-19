@@ -1,0 +1,106 @@
+name: Publish Add-on
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_bump:
+        description: 'Version bump type'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      
+      - name: Install pipenv
+        run: pip install pipenv
+      
+      - name: Install dependencies
+        run: pipenv install
+      
+      - name: Clone NHK World TV add-on repository
+        run: |
+          git clone https://github.com/sbroenne/plugin.video.nhkworldtv.git /tmp/plugin-source
+      
+      - name: Get current version and calculate new version
+        id: version
+        run: |
+          # Get current version from the cloned repository
+          CURRENT_VERSION=$(grep '<addon id="plugin.video.nhkworldtv"' /tmp/plugin-source/plugin.video.nhkworldtv/addon.xml | grep -oP 'version="\K[^"]+')
+          echo "Current version: $CURRENT_VERSION"
+          
+          # Parse version
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT_VERSION"
+          
+          # Bump version based on input
+          case "${{ github.event.inputs.version_bump }}" in
+            major)
+              MAJOR=$((MAJOR + 1))
+              MINOR=0
+              PATCH=0
+              ;;
+            minor)
+              MINOR=$((MINOR + 1))
+              PATCH=0
+              ;;
+            patch)
+              PATCH=$((PATCH + 1))
+              ;;
+          esac
+          
+          NEW_VERSION="${MAJOR}.${MINOR}.${PATCH}"
+          echo "New version: $NEW_VERSION"
+          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "current_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+      
+      - name: Update version in addon.xml
+        run: |
+          CURRENT_VERSION="${{ steps.version.outputs.current_version }}"
+          NEW_VERSION="${{ steps.version.outputs.version }}"
+          # Update only the version in the main addon tag, not dependencies
+          sed -i "0,/version=\"${CURRENT_VERSION}\"/s//version=\"${NEW_VERSION}\"/" /tmp/plugin-source/plugin.video.nhkworldtv/addon.xml
+          # Verify the update was successful
+          grep '<addon id="plugin.video.nhkworldtv"' /tmp/plugin-source/plugin.video.nhkworldtv/addon.xml | grep "version=\"${NEW_VERSION}\"" || exit 1
+          echo "Successfully updated version to ${NEW_VERSION}"
+      
+      - name: Commit version change to temporary clone
+        run: |
+          cd /tmp/plugin-source
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add plugin.video.nhkworldtv/addon.xml
+          git commit -m "Release v${{ steps.version.outputs.version }}"
+      
+      - name: Delete old add-on files
+        run: |
+          rm -rf plugin.video.nhkworldtv/plugin.video.nhkworldtv-*.zip*
+      
+      - name: Build new add-on
+        run: |
+          pipenv run ./create_repository.py --compressed file:///tmp/plugin-source:plugin.video.nhkworldtv
+      
+      - name: Commit and push changes
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "Release v${{ steps.version.outputs.version }}"
+          git push
